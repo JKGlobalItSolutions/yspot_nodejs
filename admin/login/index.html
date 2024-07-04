@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
   <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.png">
 
-  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Custom styles for this template -->
   <link href="../login/sign-in.css" rel="stylesheet" />
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
@@ -28,8 +28,8 @@
   <header>
     <nav class="navbar" style="background-color: #FF1717;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../index.html" style="margin-left: 100px;">
-          <img src="../assets/img/Frame 223.png" alt="" class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="../../index.html" style="margin-left: 100px;">
+          <img src="../../assets/img/Frame 223.png" alt="" class="d-inline-block align-text-top">
         </a>
       </div>
     </nav>
@@ -49,8 +49,8 @@
           <label id="passwordInp" for="floatingPassword" style="opacity: 30%;">Enter Your Password</label>
           <a href="../forgotpassword.html" id="forgotpassword" class="text-primary" style="text-decoration: none; cursor: pointer;">Forgot password?</a>
         </div><br>
-      <a href="../admin/login/index.html"><button class="btn text-light w-100 py-2" type="button" id="emailSignInButtonadmin" style="background-color: #FF1717; height: 50px;">Sign In</button></a>  
-        <a href="./signup.html"><button class="btn text-light w-100 py-2 mt-2" type="button" id="emailSignInButtonadmin" style="background-color: #FF1717; height: 50px;">Sign up</button></a>
+        <button class="btn text-light w-100 py-2" type="button" id="emailSignInButton" style="background-color: #FF1717; height: 50px;">Sign In</button>
+        <a href="./signup.html"><button class="btn text-light w-100 py-2 mt-2" type="button" id="emailSignInButton" style="background-color: #FF1717; height: 50px;">Sign up</button></a>
 
         <div class="container" style="display: none;">
           <button class="btn btn-danger text-center" id="signOutButton">Sign Out</button>
@@ -87,7 +87,7 @@
       const provider = new GoogleAuthProvider();
       const emailInp = document.getElementById("floatingInput");
       const passwordInp = document.getElementById("floatingPassword");
-      const emailSignInButtonadmin = document.getElementById("emailSignInButtonadmin");
+      const emailSignInButton = document.getElementById("emailSignInButton");
       const signOutButton = document.getElementById("signOutButton");
       const message = document.getElementById("message");
       const userName = document.getElementById("userName");
@@ -146,20 +146,19 @@
         }
       };
 
-    //   onAuthStateChanged(auth, (user) => {
-    //     if (user) {
-    //       signOutButton.style.display = "block";
-    //       message.style.display = "block";
-    //       userName.innerHTML = user.displayName || "User";
-    //       userEmail.innerHTML = user.email;
-    //     } else {
-    //       signOutButton.style.display = "none";
-    //       message.style.display = "none";
-    //     }
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          signOutButton.style.display = "block";
+          message.style.display = "block";
+          userName.innerHTML = user.displayName || "User";
+          userEmail.innerHTML = user.email;
+        } else {
+          signOutButton.style.display = "none";
+          message.style.display = "none";
+        }
+      });
 
-    //   });
-
-      emailSignInButtonadmin.addEventListener('click', (event) => {
+      emailSignInButton.addEventListener('click', (event) => {
         event.preventDefault();
         emailSignIn();
       });
